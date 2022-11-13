@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model category {
+  id      Int       @id @default(autoincrement())
+  name    String?   @db.VarChar(255)
+  product product[]
+}
+
+model product {
+  id                         Int       @id @default(autoincrement())
+  name                       String?   @db.VarChar(255)
+  url_image                  String?   @db.VarChar(255)
+  price                      Float?    @db.Float
+  discount                   Int?
+  category                   Int?
+  category_categoryToproduct category? @relation(fields: [category], references: [id], onDelete: Restrict, onUpdate: Restrict, map: "product_ibfk_1")
+
+  @@index([category], map: "product_category")
+  @@index([discount], map: "product_discount")
+  @@index([name], map: "product_name")
+  @@index([price], map: "product_price")
+}

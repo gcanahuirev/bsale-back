@@ -1,0 +1,250 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api/v1/category": {
+      "get": {
+        "operationId": "CategoryController_findManyCategories",
+        "summary": "",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ecommerce"
+        ]
+      }
+    },
+    "/api/v1/category/{id}": {
+      "get": {
+        "operationId": "CategoryController_findUniqueCategory",
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ecommerce"
+        ]
+      }
+    },
+    "/api/v1/category/{id}/products": {
+      "get": {
+        "operationId": "CategoryController_findUniqueCategoryWithProducts",
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ecommerce"
+        ]
+      }
+    },
+    "/api/v1/product": {
+      "get": {
+        "operationId": "ProductController_findManyProducts",
+        "summary": "",
+        "description": "",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ecommerce"
+        ]
+      }
+    },
+    "/api/v1/product/categories/{id}": {
+      "get": {
+        "operationId": "ProductController_findManyProductsByCategory",
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ecommerce"
+        ]
+      }
+    },
+    "/api/v1/product/{id}": {
+      "get": {
+        "operationId": "ProductController_findUniqueProduct",
+        "summary": "",
+        "description": "",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProductDto"
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Ecommerce"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Bsale Challenge Nest 9",
+    "description": "Api rest challenge",
+    "version": "0.0.1",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "ProductDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "url_image": {
+            "type": "string",
+            "nullable": true
+          },
+          "price": {
+            "type": "number",
+            "nullable": true
+          },
+          "discount": {
+            "type": "number",
+            "nullable": true
+          },
+          "category": {
+            "type": "number",
+            "nullable": true
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "url_image",
+          "price",
+          "discount",
+          "category"
+        ]
+      },
+      "CategoryDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "name": {
+            "type": "string",
+            "nullable": true
+          },
+          "product": {
+            "nullable": true,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ProductDto"
+            }
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ]
+      }
+    }
+  }
+}

@@ -4,16 +4,16 @@ import {
   SwaggerCustomOptions,
   SwaggerModule,
 } from '@nestjs/swagger';
+import { writeFileSync } from 'fs';
 
 export const initSwagger = (app: INestApplication) => {
   const swaggerConfig = new DocumentBuilder()
-    .setTitle('Boilerplate Nest 9')
-    .addBearerAuth()
-    .setDescription('Configuración base para proyectos nest')
+    .setTitle('Bsale Challenge Nest 9')
+    .setDescription('Api rest challenge')
     .setVersion('0.0.1')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);
-  SwaggerModule.setup('/api/docs', app, document, {
+  SwaggerModule.setup('/api/v1/docs', app, document, {
     swaggerOptions: {
       deepLinking: true,
       displayOperationId: true,
@@ -30,4 +30,5 @@ export const initSwagger = (app: INestApplication) => {
       tryItOutEnabled: false,
     },
   } as SwaggerCustomOptions);
+  writeFileSync('./swagger-spec.json', JSON.stringify(document, null, 2));
 };
