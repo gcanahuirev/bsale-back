@@ -33,6 +33,10 @@ COPY --chown=node:node package.json yarn.lock ./
 
 RUN yarn install --production
 
+COPY --chown=node:node . .
+
+RUN yarn prisma generate
+
 COPY --chown=node:node --from=build /home/node/app/dist .
 
 CMD [ "dumb-init", "node", "main.js" ]
