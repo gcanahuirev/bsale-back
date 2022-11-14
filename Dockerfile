@@ -1,6 +1,4 @@
-FROM node:16.15-bullseye-slim AS base
-
-RUN curl -fsSL https://get.pnpm.io/install.sh | sh -
+FROM node:16.15-alpine3.15 AS base
 
 RUN apk --no-cache add dumb-init
 
@@ -15,23 +13,23 @@ RUN mkdir tmp
 
 FROM base AS dependencies
 
-COPY --chown=node:node package.json pnpm-lock.yaml ./
+COPY --chown=node:node package.json yarn.lock ./
 
-RUN pnpm install --prod
+RUN yarn install --non-interactive
 
 COPY --chown=node:node . .
 
 
 FROM dependencies AS build
 
-RUN pnpm build
+RUN yarn build
 
 
 FROM base AS production
 
 COPY --chown=node:node package.json pnpm-lock.yaml ./
 
-RUN pnpm install --prod
+RUN yarn install --production
 
 COPY --chown=node:node --from=build /home/node/app/dist .
 
