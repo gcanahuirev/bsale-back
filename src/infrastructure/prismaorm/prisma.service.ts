@@ -35,6 +35,15 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
       await app.close();
     });
   }
+
+  async checkConnection(): Promise<boolean> {
+    try {
+      await this.$executeRaw`SELECT 1`;
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
 }
 
 export default prisma;

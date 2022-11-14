@@ -13,10 +13,18 @@ export default class CategoryRepositoryAdapter implements ICategoryRepository {
   ) {}
 
   async findManyCategories(): Promise<CategoryDto[]> {
+    const checkConnection = await this.categoryRepository.checkConnection();
+    if (!checkConnection) {
+      await this.categoryRepository.onModuleInit();
+    }
     return this.categoryRepository.category.findMany();
   }
 
   async findUniqueCategory(id: number): Promise<CategoryDto | null> {
+    const checkConnection = await this.categoryRepository.checkConnection();
+    if (!checkConnection) {
+      await this.categoryRepository.onModuleInit();
+    }
     return this.categoryRepository.category.findUnique({
       where: { id },
       include: { product: true },

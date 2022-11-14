@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "paths": {
-    "/api/v1/category": {
+    "/api/v1/categories": {
       "get": {
         "operationId": "CategoryController_findManyCategories",
         "summary": "",
@@ -24,7 +24,7 @@
         ]
       }
     },
-    "/api/v1/category/{id}": {
+    "/api/v1/categories/{id}": {
       "get": {
         "operationId": "CategoryController_findUniqueCategory",
         "summary": "",
@@ -56,7 +56,7 @@
         ]
       }
     },
-    "/api/v1/category/{id}/products": {
+    "/api/v1/categories/{id}/products": {
       "get": {
         "operationId": "CategoryController_findUniqueCategoryWithProducts",
         "summary": "",
@@ -88,12 +88,29 @@
         ]
       }
     },
-    "/api/v1/product": {
+    "/api/v1/products": {
       "get": {
         "operationId": "ProductController_findManyProducts",
         "summary": "",
         "description": "",
-        "parameters": [],
+        "parameters": [
+          {
+            "name": "category",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "search",
+            "required": false,
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "",
@@ -111,7 +128,7 @@
         ]
       }
     },
-    "/api/v1/product/categories/{id}": {
+    "/api/v1/products/categories/{id}": {
       "get": {
         "operationId": "ProductController_findManyProductsByCategory",
         "summary": "",
@@ -143,7 +160,7 @@
         ]
       }
     },
-    "/api/v1/product/{id}": {
+    "/api/v1/products/{id}": {
       "get": {
         "operationId": "ProductController_findUniqueProduct",
         "summary": "",

@@ -47,7 +47,7 @@ lerna-debug.log*
 .yarn/install-state.gz
 
 # IDE VisualStudioCode
-.vscode/*
+/.vscode
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json

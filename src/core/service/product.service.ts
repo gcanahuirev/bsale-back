@@ -12,8 +12,11 @@ export class ProductService {
     private readonly iProduct: IProduct,
   ) {}
 
-  async findManyProducts(): Promise<ProductDto[]> {
-    return this.iProduct.findManyProducts();
+  async findManyProducts(
+    category?: number,
+    search?: string,
+  ): Promise<ProductDto[]> {
+    return this.iProduct.findManyProducts(category, search);
   }
 
   async findManyProductsByCategory(id: number): Promise<ProductDto[] | null> {

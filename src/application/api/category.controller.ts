@@ -35,7 +35,7 @@ export class CategoryController {
   async findUniqueCategoryWithProducts(@Param('id', ParseIntPipe) id: number) {
     const data = await this.categoryService.findUniqueCategory(id);
     return {
-      message: 'Category found',
+      message: 'Category found with products',
       data,
     };
   }

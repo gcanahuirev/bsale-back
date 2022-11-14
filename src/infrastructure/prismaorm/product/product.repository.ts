@@ -12,15 +12,37 @@ export default class ProductRepositoryAdapter implements IProductRepository {
     private readonly productRepository: PrismaService,
   ) {}
 
-  async findManyProducts(): Promise<ProductDto[]> {
+  async findManyProducts(id?: number, search?: string): Promise<ProductDto[]> {
+    const checkConnection = await this.productRepository.checkConnection();
+    if (!checkConnection) {
+      await this.productRepository.onModuleInit();
+    }
+    const where = {};
+    if (search) {
+      Object.assign(where, { name: { contains: search } });
+    }
+    if (id) {
+      Object.assign(where, { category_categoryToproduct: { id } });
+    }
+    if (search || id) {
+      return this.productRepository.product.findMany({ where });
+    }
     return this.productRepository.product.findMany();
   }
 
   async findUniqueProduct(id: number): Promise<ProductDto | null> {
+    const checkConnection = await this.productRepository.checkConnection();
+    if (!checkConnection) {
+      await this.productRepository.onModuleInit();
+    }
     return this.productRepository.product.findUnique({ where: { id } });
   }
 
   async findManyProductsByCategory(id: number): Promise<ProductDto[] | null> {
+    const checkConnection = await this.productRepository.checkConnection();
+    if (!checkConnection) {
+      await this.productRepository.onModuleInit();
+    }
     return this.productRepository.product.findMany({
       where: { category_categoryToproduct: { id } },
     });
