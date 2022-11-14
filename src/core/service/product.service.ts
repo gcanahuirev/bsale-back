@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 
-import IProduct from '../domain/product/Product.interface';
+import IProduct from '../domain/product/product.interface';
 import { ProductDITokens } from '../domain/product/ProductDiTokens';
 
 import { ProductDto } from '../domain/product/Product.dto';
