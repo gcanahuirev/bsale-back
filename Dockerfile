@@ -27,7 +27,7 @@ RUN yarn build
 
 FROM base AS production
 
-COPY --chown=node:node package.json pnpm-lock.yaml ./
+COPY --chown=node:node package.json yarn.lock ./
 
 RUN yarn install --production
 
