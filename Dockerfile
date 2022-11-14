@@ -17,8 +17,6 @@ COPY --chown=node:node package.json yarn.lock ./
 
 RUN yarn install --non-interactive
 
-RUN yarn prisma generate
-
 COPY --chown=node:node . .
 
 

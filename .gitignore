@@ -65,3 +65,4 @@ lerna-debug.log*
 
 # Local History for Visual Studio Code
 /.history
+*.zip
